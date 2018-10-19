@@ -1,0 +1,12 @@
+.next-button button {
+    width: 70px;
+    background-color: #E2E5DD;
+    height: 70px;
+    border: none;
+    opacity: .6;
+    outline: none;
+}
+
+.next-button button:hover {
+    transform: scale(1.03);
+}
