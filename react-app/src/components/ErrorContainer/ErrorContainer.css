@@ -1,0 +1,76 @@
+.error-container {
+    position: absolute;
+    margin: auto;
+    background: red;
+    max-width: 800px;
+    height: 500px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-buttons-div ul{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-buttons-div ul li {
+    margin-left: 20px;
+}
+
+.nav-buttons-div ul li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.error-footer-nav-row ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.error-footer-nav-row ul li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.error-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.error-body-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+.error-body-right {
+    background-image: url('../../images/broken.jpg');
+    height: 300px;
+    flex-basis: 300px;
+    background-size: cover;
+}
+
+.error-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.error-footer-left {
+    display: flex;
+    flex-direction: column;
+}

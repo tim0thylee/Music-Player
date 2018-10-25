@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import "./MusicPlayer.css";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import song1 from "../../music/music.mp3";
-import Controls from "../Controls/Controls";
 
 var data = {
     title:'Hello',
@@ -15,29 +14,6 @@ var data = {
     }]
 }
 
-// class Controls extends Component {
-//     constructor (props) {
-//         super(props) 
-//     }
-
-//     render () {
-//         let playpause;
-
-//         if(this.props.playing === false) {
-//             playpause = <i className="fas fa-play" id="play"></i>
-//             this.props.stopTimer();
-//         } else {
-//             playpause = <i className="fas fa-pause" id="pause"></i>
-//             this.props.startTimer();
-//             this.playSong();
-//         }
-
-
-//         return (
-//             <button className="play-button button-hover-action" onClick={this.props.handleClick}>{playpause}</button>
-//         )
-//     }
-// }
 
 class MusicPlayer extends Component {
 
@@ -64,23 +40,31 @@ class MusicPlayer extends Component {
     handleClick = (event) => {
         if(event.target.id === 'play'){
             this.setState({playing: true});
+            this.startTimer();
+            this.playSong();
         } else {
-            this.setState({playing: false})
+            this.setState({playing: false});
+            this.stopTimer();
+            this.stopSong();
         }
     }
 
     startTimer = () => {
-        setInterval(() =>  this.setState({
-            time: this.state.time + 1
-        })
-        , 1000)
-
-        // this.playSong();
+        this.timer = setInterval(() =>  {
+            if(this.state.time < 17){
+                this.setState({time: this.state.time + 1})
+            }
+            if(this.state.time === 17){
+                clearInterval(this.timer);
+                this.setState({time: 0})
+            }
+        }
+        , 1000);
+        
     }
 
     stopTimer = () => {
-        clearInterval(this.startTimer);
-        console.log(this.startTimer)
+        clearInterval(this.timer);
     }
 
     playSong = () => {
@@ -91,12 +75,24 @@ class MusicPlayer extends Component {
         this.song1.pause();
     }
 
-    
-
-    
+    formatTime = (data) => {
+        if(data < 10){
+            return `0:0${data}`;
+        }
+        else {
+            return `0:${data}`
+        }
+    }
 
 
     render () {
+        let playpause;
+
+        if(this.state.playing === false) {
+            playpause = <i className="fas fa-play" id="play"></i>
+        } else {
+            playpause = <i className="fas fa-pause" id="pause"></i>
+        }
         return (
             <div className="music-player">
                 <div className="album-cover">
@@ -106,11 +102,11 @@ class MusicPlayer extends Component {
                     <h2>D.J. Cool Boy</h2>
                     <div className="progress-div">
                         <div className="music-time">
-                            <p>{this.state.time}</p>
+                            <p>{this.formatTime(this.state.time)}</p>
                             <p>{data.tracks[0].duration}</p>
                         </div>
                         <ProgressBar
-                            percentage={this.state.time}
+                            percentage={(this.state.time/17)*100}
                         />
                         <div className="progress-buttons-div">
                             <button className="replay-button button-hover-action"><i className="fas fa-retweet"></i></button>
@@ -118,15 +114,9 @@ class MusicPlayer extends Component {
                         </div>
                     </div>
                     <div className="play-buttons-div">
-                        <button className="left-button button-hover-action" onClick={this.startTimer}><i className="fas fa-angle-double-left"></i></button>
-                        <Controls 
-                            playing={this.state.playing} 
-                            handleClick={this.handleClick}
-                            stopTimer={this.stopTimer}
-                            startTimer={this.startTimer}
-                            playSong={this.playSong}
-                        />
-                        <button className="right-button button-hover-action" onClick={this.stopTimer}><i className="fas fa-angle-double-right"></i></button>
+                        <button className="left-button button-hover-action"><i className="fas fa-angle-double-left"></i></button>
+                        <button className="play-button button-hover-action" onClick={this.handleClick}>{playpause}</button>
+                        <button className="right-button button-hover-action"><i className="fas fa-angle-double-right"></i></button>
                     </div>
                 </div>
             </div>

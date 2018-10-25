@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import Container from "./components/Container/Container";
-import './App.css';
-import './reset.css';
+import Home from './pages/Home';
+import { Route, Switch } from "react-router-dom";
+import Error from "./pages/Error";
 
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Container />
-        <div className="triangle-background">
-        </div>
-      </div>
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route component={Error} />
+    </Switch>
     );
   }
 }
