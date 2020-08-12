@@ -9,7 +9,7 @@ class Home extends Component {
     return (
       <div className="App">
         <Container />
-        <div className="triangle-background">
+        <div className="triangle-background testing-commit-part-2">
         </div>
       </div>
     );
